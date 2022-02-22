@@ -39,6 +39,12 @@ public class SpringConfig {
         return new MemberService(memberRepository);
     }
 
+    // 이렇게 Config로 등록하면 AOP가 등록되서 쓰이고 있구나 라는 것을 알아보기 쉬움
+//    @Bean
+//    public TimeTraceAop timeTraceAop() {
+//        return new TimeTraceAop();
+//    }
+
 //    @Bean
 //    public MemberRepository memberRepository() {
 //        return new MemoryMemberRepository();
