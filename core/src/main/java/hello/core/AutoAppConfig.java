@@ -17,8 +17,10 @@ public class AutoAppConfig {
     /**
      * 수동 빈 등록 vs 자동 빈 등록 -> 충돌 코드
      */
+    /*
     @Bean(name = "memoryMemberRepository")
     MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
+    */
 }
