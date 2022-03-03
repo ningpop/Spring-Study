@@ -12,7 +12,7 @@ import hello.core.order.OrderServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration // -> ComponentScan 사용 시 @Configuration은 내부에 @Component가 있어 ComponentScan의 대상이 된다.
 public class AppConfig {
 
     //@Bean memberService -> new MemoryMemberRepository()
