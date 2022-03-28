@@ -1,1 +1,4 @@
-# Spring-Complete-Conquest-Roadmap
+# Spring-Stduy
+### 인프런에서 김영한님의 Spring 관련 강의 로드맵 2개를 학습하고 보관하는 Repository입니다.
+> 1. 스프링 완전 정복 로드맵
+> 2. 스프링 부트와 JPA 실무 완전 정복 로드맵
