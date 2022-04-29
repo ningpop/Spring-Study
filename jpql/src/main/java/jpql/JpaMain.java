@@ -28,8 +28,9 @@ public class JpaMain {
             em.persist(team);
 
             Member member = new Member();
-            member.setUsername("member1");
+            member.setUsername("teamA");
             member.setAge(10);
+            member.setType(MemberType.ADMIN);
 
             member.setTeam(team);
 
@@ -81,9 +82,22 @@ public class JpaMain {
 //            String query = "select m from Member m left join m.team t"; // left outer join
 //            String query = "select m from Member m, Team t where m.username = t.name"; // seta join
 //            String query = "select m from Member m left join m.team t on t.name = 'teamA'"; // on 절 - 조인 대상 필터링
-            String query = "select m from Member m left join Team t on m.username = t.name"; // on 절 - 연관관계 없는 엔티티 외부 조인
-            List<Member> result = em.createQuery(query, Member.class)
+//            String query = "select m from Member m left join Team t on m.username = t.name"; // on 절 - 연관관계 없는 엔티티 외부 조인
+//            List<Member> result = em.createQuery(query, Member.class)
+//                    .getResultList();
+
+            String query = "select m.username, 'HELLO', true from Member m " +
+                    "where m.type = :userType";
+            List<Object[]> result = em.createQuery(query)
+                    .setParameter("userType", MemberType.ADMIN)
                     .getResultList();
+
+            for (Object[] objects : result) {
+                System.out.println("objects[0] = " + objects[0]);
+                System.out.println("objects[0] = " + objects[1]);
+                System.out.println("objects[0] = " + objects[2]);
+            }
+
 
             tx.commit();
         } catch (Exception e) {
