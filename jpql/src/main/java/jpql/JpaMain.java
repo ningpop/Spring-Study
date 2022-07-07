@@ -1,6 +1,7 @@
 package jpql;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 public class JpaMain {
@@ -23,20 +24,20 @@ public class JpaMain {
 //                em.persist(member);
 //            }
 
-            Team team = new Team();
-            team.setName("teamA");
-            em.persist(team);
+//            Team team = new Team();
+//            team.setName("teamA");
+//            em.persist(team);
 
-            Member member = new Member();
+//            Member member = new Member();
 //            member.setUsername("teamA");
 //            member.setUsername(null);
-            member.setUsername("관리자");
-            member.setAge(10);
-            member.setType(MemberType.ADMIN);
-
-            member.setTeam(team);
-
-            em.persist(member);
+//            member.setUsername("관리자");
+//            member.setAge(10);
+//            member.setType(MemberType.ADMIN);
+//
+//            member.setTeam(team);
+//
+//            em.persist(member);
 
 //            TypedQuery<Member> query1 = em.createQuery("select m from Member m", Member.class); // 반환 타입이 명확
 //            List<Member> resultList = query1.getResultList();
@@ -50,6 +51,19 @@ public class JpaMain {
 //                    .setParameter("username", "member1")
 //                    .getSingleResult();
 //            System.out.println("singleResult = " + result.getUsername());
+
+            Team team = new Team();
+            em.persist(team);
+
+            Member member1 = new Member();
+            member1.setUsername("관리자1");
+            member1.setTeam(team);
+            em.persist(member1);
+
+            Member member2 = new Member();
+            member2.setUsername("관리자2");
+            member2.setTeam(team);
+            em.persist(member2);
 
             em.flush();
             em.clear();
@@ -111,13 +125,12 @@ public class JpaMain {
 //                    "from Member m";
 //            String query = "select concat('a', 'b') from Member m";
 //            String query = "select locate('de', 'abcdef') from Member m";
-            String query = "select size(t.members) from Team t";
-            List<Integer> result = em.createQuery(query, Integer.class)
+//            String query = "select size(t.members) from Team t";
+            String query = "select t.members from Team t";
+            Collection result = em.createQuery(query, Collection.class)
                     .getResultList();
 
-            for (Integer s : result) {
-                System.out.println("s = " + s);
-            }
+            System.out.println("result = " + result);
 
 
             tx.commit();
