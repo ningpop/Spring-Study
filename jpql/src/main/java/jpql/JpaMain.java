@@ -169,12 +169,30 @@ public class JpaMain {
 //            }
 
             // Named 쿼리
-            List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
-                    .setParameter("username", "회원1")
-                    .getResultList();
-            for (Member member : resultList) {
-                System.out.println("member = " + member);
-            }
+//            List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
+//                    .setParameter("username", "회원1")
+//                    .getResultList();
+//            for (Member member : resultList) {
+//                System.out.println("member = " + member);
+//            }
+
+            // 벌크 연산
+            int resultCount = em.createQuery("update Member m set m.age = 20")
+                    .executeUpdate();
+            System.out.println("resultCount = " + resultCount);
+
+            System.out.println("member1 = " + member1.getAge());
+            System.out.println("member2 = " + member2.getAge());
+            System.out.println("member3 = " + member3.getAge());
+
+            em.clear(); // 벌크 연산 수행 후 영속성 컨텍스트 초기화 필수
+
+            Member findMember1 = em.find(Member.class, member1.getId());
+            Member findMember2 = em.find(Member.class, member2.getId());
+            Member findMember3 = em.find(Member.class, member3.getId());
+            System.out.println("findMember1 = " + findMember1.getAge());
+            System.out.println("findMember2 = " + findMember2.getAge());
+            System.out.println("findMember3 = " + findMember3.getAge());
 
 
             tx.commit();
