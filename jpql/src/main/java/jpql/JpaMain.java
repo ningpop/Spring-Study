@@ -145,11 +145,11 @@ public class JpaMain {
 //                    .setMaxResults(2)
 //                    .getResultList();
 
-            String query = "select m from Member m where m.id = :memberId";
-            Member findMember = em.createQuery(query, Member.class)
-                    .setParameter("memberId", member1.getId())
-                    .getSingleResult();
-            System.out.println("findMember = " + findMember);
+//            String query = "select m from Member m where m.id = :memberId";
+//            Member findMember = em.createQuery(query, Member.class)
+//                    .setParameter("memberId", member1.getId())
+//                    .getSingleResult();
+//            System.out.println("findMember = " + findMember);
 
 //            System.out.println("result = " + result.size());
 
@@ -167,6 +167,15 @@ public class JpaMain {
 //                    System.out.println("-> member = " + member);
 //                }
 //            }
+
+            // Named 쿼리
+            List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
+                    .setParameter("username", "회원1")
+                    .getResultList();
+            for (Member member : resultList) {
+                System.out.println("member = " + member);
+            }
+
 
             tx.commit();
         } catch (Exception e) {
