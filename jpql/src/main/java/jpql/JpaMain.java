@@ -139,13 +139,19 @@ public class JpaMain {
 //            String query = "select t.members from Team t";
 //            String query = "select m from Member m join fetch m.team";
 //            String query = "select t from Team t join fetch t.members";
-            String query = "select t from Team t";
-            List<Team> result = em.createQuery(query, Team.class)
-                    .setFirstResult(0)
-                    .setMaxResults(2)
-                    .getResultList();
+//            String query = "select t from Team t";
+//            List<Team> result = em.createQuery(query, Team.class)
+//                    .setFirstResult(0)
+//                    .setMaxResults(2)
+//                    .getResultList();
 
-            System.out.println("result = " + result.size());
+            String query = "select m from Member m where m.id = :memberId";
+            Member findMember = em.createQuery(query, Member.class)
+                    .setParameter("memberId", member1.getId())
+                    .getSingleResult();
+            System.out.println("findMember = " + findMember);
+
+//            System.out.println("result = " + result.size());
 
 //            for (Member member : result) {
 //                System.out.println("member = " + member.getUsername() + ", " + member.getTeam().getName());
@@ -155,12 +161,12 @@ public class JpaMain {
 //
 //                //그럼 회원 100명이라면? 100번의 쿼리. -> "N + 1 문제" 발생 -> 페치 조인으로 지연 로딩을 없애서 해결
 //            }
-            for (Team team : result) {
-                System.out.println("team = " + team.getName() + "|Members = " + team.getMembers().size());
-                for (Member member : team.getMembers()) {
-                    System.out.println("-> member = " + member);
-                }
-            }
+//            for (Team team : result) {
+//                System.out.println("team = " + team.getName() + "|Members = " + team.getMembers().size());
+//                for (Member member : team.getMembers()) {
+//                    System.out.println("-> member = " + member);
+//                }
+//            }
 
             tx.commit();
         } catch (Exception e) {
