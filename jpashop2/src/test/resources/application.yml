@@ -1,0 +1,20 @@
+spring:
+    # 아래의 내용들이 없으면 SpringBoot에서 자동으로 메모리모드로 돌림
+#  datasource:
+#    url: jdbc:h2:tcp://localhost/~/jpashop
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: create # 애플리케이션 실행 시점에 테이블을 drop하고, 다시 생성한다.
+#    properties:
+#      hibernate:
+##        show_sql: true
+#        format_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
