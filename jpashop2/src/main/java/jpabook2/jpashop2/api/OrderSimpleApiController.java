@@ -51,6 +51,17 @@ public class OrderSimpleApiController {
         return result;
     }
 
+    @GetMapping("/api/v3/simple-orders")
+    public List<SimpleOrderDto> ordersV3() {
+        List<Order> orders = orderRepository.findAllWithMemberDelivery();
+
+        List<SimpleOrderDto> result = orders.stream()
+                .map(o -> new SimpleOrderDto(o))
+                .collect(Collectors.toList());
+
+        return result;
+    }
+
     @Data
     static class SimpleOrderDto {
         private Long orderId;
@@ -60,7 +71,7 @@ public class OrderSimpleApiController {
         private Address address;
 
         /**
-         * DTO가 엔티티를 받는것은 문제 되지 않음
+         * DTO가 엔티티를 직접 받는 것은 문제 되지 않음
          */
         public SimpleOrderDto(Order order) {
             orderId = order.getId();
